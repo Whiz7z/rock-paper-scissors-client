@@ -1,0 +1,15 @@
+@import "./MainStyles/variables.scss";
+
+html,
+body {
+  color: $text;
+  background-color: $back;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
