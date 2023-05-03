@@ -1,0 +1,74 @@
+@import "../../MainStyles/variables.scss";
+
+.room_item {
+  display: grid;
+  grid-template-columns: 160px repeat(2, 130px) 55px;
+
+  transition: 300ms;
+
+  .room_id {
+    justify-self: start;
+    align-self: center;
+  }
+
+  .room_join_btn {
+    border: none;
+    background-color: $good;
+    color: $text;
+    font-weight: bold;
+    cursor: pointer;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    padding: 0 10px;
+    transition: 300ms;
+    transform: translateX(5%);
+    height: 30px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-family: Arial, sans-serif;
+    line-height: 30px;
+    &:hover {
+      transition: 300ms;
+      transform: scale(115%);
+      z-index: 10;
+      animation-name: blurBtn;
+      animation-duration: 400ms;
+    }
+  }
+
+  .room_delete_btn {
+    border: none;
+    background-color: $bad;
+    color: $text;
+    font-weight: bold;
+    cursor: pointer;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    padding: 0 10px;
+    transition: 300ms;
+    transform: translateX(-5%);
+    height: 30px;
+    font-size: 1.3rem;
+    &:hover {
+      transition: 300ms;
+      z-index: 10;
+      transform: scale(115%);
+      animation-name: blurBtn;
+      animation-duration: 400ms;
+    }
+  }
+
+  .room_players_count {
+    text-align: end;
+    justify-self: center;
+    align-self: center;
+  }
+}
+
+@keyframes blurBtn {
+  0% {
+    filter: blur(5px);
+  }
+
+  100% {
+    filter: blur(0px);
+  }
+}

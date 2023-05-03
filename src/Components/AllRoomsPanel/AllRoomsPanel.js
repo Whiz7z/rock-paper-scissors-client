@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "./AllRoomsPanel.module.scss";
 import RoomsList from "../RoomsList/RoomsList";
 import { useRooms } from "../../zustand/store";
+import axios from "axios";
 
 const AllRoomsPanel = () => {
   const inputRef = useRef();
@@ -9,10 +10,23 @@ const AllRoomsPanel = () => {
 
   const createRoomHandler = () => {
     console.log(inputRef.current.value);
-
-    const roomObj = { roomId: inputRef.current.value, players: [] };
-    addRoom(roomObj);
+    if (inputRef.current.value.trim().length > 0) {
+      const roomObj = { roomId: inputRef.current.value, players: [] };
+      addRoom(roomObj);
+    }
   };
+
+  useEffect(() => {
+    const request = async () => {
+      const response = await axios.get(
+        process.env.REACT_APP_SERVER_URL + "/api/hello"
+      );
+
+      console.log(response);
+    };
+    console.log("called");
+    request();
+  }, []);
   return (
     <div className={styles.wrapper}>
       <div className={styles.player_info}>
