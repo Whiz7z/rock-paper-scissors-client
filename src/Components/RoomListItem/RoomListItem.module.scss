@@ -2,6 +2,8 @@
 
 .room_item {
   display: grid;
+  height: 40px;
+  align-content: center;
   grid-template-columns: 160px repeat(2, 130px) 55px;
 
   transition: 300ms;

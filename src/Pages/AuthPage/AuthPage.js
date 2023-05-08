@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./AuthPage.module.scss";
 import { Formik, Form, Field } from "formik";
+import { useUser } from "../../zustand/store";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const SingInSchema = Yup.object().shape({
@@ -14,11 +16,20 @@ const SingInSchema = Yup.object().shape({
     .required("Required"),
 });
 const AuthPage = () => {
+  const navigate = useNavigate();
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const { user, login, register } = useUser((state) => state);
 
   const toggleAuthMode = () => {
     setIsLoginMode((prev) => !prev);
   };
+  // if (
+  //   sessionStorage.getItem("userData") &&
+  //   JSON.parse(sessionStorage.getItem("userData")).token
+  // ) {
+  //   navigate("/");
+  // }
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -29,8 +40,18 @@ const AuthPage = () => {
             password: "",
           }}
           validationSchema={SingInSchema}
-          onSubmit={(values, actions) => {
+          onSubmit={async (values, actions) => {
             console.log(values);
+
+            if (isLoginMode) {
+              await login(values.nickname, values.password).then(() =>
+                navigate("/")
+              );
+            } else {
+              await register(values.nickname, values.password).then(() =>
+                navigate("/")
+              );
+            }
           }}
         >
           {({ errors, touched }) => (

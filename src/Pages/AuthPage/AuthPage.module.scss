@@ -16,7 +16,7 @@
     }
     .form {
       padding-top: 30px;
-      width: 400px;
+      width: 450px;
       height: 500px;
       align-self: center;
       justify-self: center;
@@ -28,7 +28,7 @@
         width: 100%;
         align-self: center;
         .label {
-          margin-left: 22px;
+          margin-left: 45px;
           font-weight: bold;
           font-size: 1.65rem;
         }
@@ -67,7 +67,7 @@
 
           .error {
             color: $bad;
-            margin-left: 22px;
+            margin-left: 45px;
           }
         }
       }
