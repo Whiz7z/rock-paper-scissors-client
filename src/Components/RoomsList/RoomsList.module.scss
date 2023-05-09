@@ -29,4 +29,8 @@
   &::-webkit-scrollbar-thumb:hover {
     background: $bad;
   }
+
+  @media (max-width: 550px) {
+    max-height: 240px;
+  }
 }

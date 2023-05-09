@@ -26,7 +26,7 @@
     .game_block {
       width: 550px;
       justify-self: center;
-      height: 80vh;
+      height: auto;
       -webkit-box-shadow: 0px 0px 22px 12px rgba(0, 0, 0, 0.28);
       -moz-box-shadow: 0px 0px 22px 12px rgba(0, 0, 0, 0.28);
       box-shadow: 0px 0px 22px 12px rgba(0, 0, 0, 0.28);
@@ -45,7 +45,7 @@
         display: grid;
         border-top: 5px solid $text;
 
-        padding: 20px 10px 20px 0;
+        padding: 20px 0px 0px 0;
 
         .opponent_name {
           text-align: center;
@@ -100,7 +100,7 @@
         display: grid;
         row-gap: 50px;
         border-top: 5px solid $text;
-        padding: 20px 10px 20px 0;
+        padding: 20px 0px 20px 0;
         margin-top: 20px;
 
         .my_status {
@@ -135,6 +135,7 @@
           display: grid;
           grid-template-columns: 1fr 1fr;
           row-gap: 50px;
+
           .move {
             svg {
               width: 140px;
@@ -180,6 +181,130 @@
               }
             }
           }
+
+          @media (max-height: 1160px) {
+            grid-template-columns: 1fr 1fr 1fr;
+
+            .move {
+              svg {
+                width: 100px;
+                height: 120px;
+              }
+            }
+
+            .paper_move {
+              svg {
+                height: 100px;
+              }
+            }
+            .scissors_move {
+              grid-row: 1/2;
+              grid-column: 3/4;
+            }
+          }
+          @media (max-width: 490px) {
+            grid-template-columns: 1fr 1fr 1fr;
+
+            .move {
+              svg {
+                width: 70px;
+                height: 90px;
+              }
+            }
+
+            .paper_move {
+              svg {
+                height: 70px;
+              }
+            }
+            .scissors_move {
+              grid-row: 1/2;
+              grid-column: 3/4;
+            }
+          }
+
+          @media (max-width: 490px) {
+            grid-template-columns: 1fr 1fr;
+            row-gap: 5px;
+
+            .move {
+              svg {
+                width: 70px;
+                height: 90px;
+              }
+            }
+
+            .paper_move {
+              svg {
+                height: 70px;
+              }
+            }
+            .scissors_move {
+              grid-row: 2/3;
+              grid-column: 1/3;
+              justify-self: center;
+              margin-top: -20px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 780px) {
+    .content {
+      width: 100%;
+      justify-self: center;
+      .game_block {
+        width: 80%;
+        height: auto;
+        font-size: 1.55rem;
+        justify-self: center;
+        padding: 20px 10px;
+        .room_name {
+          margin-bottom: 20px;
+          font-size: 1.8rem;
+        }
+
+        .opponent_part {
+          .opponent_move_status {
+            margin-top: 15px;
+          }
+
+          .opponent_move_status_ok {
+            margin-top: 15px;
+          }
+
+          .opponent_score {
+            margin-top: 20px;
+          }
+        }
+
+        .player_part {
+          row-gap: 20px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 380px) {
+    .content {
+      .game_block {
+        .room_name {
+        }
+
+        .opponent_part {
+          .opponent_move_status {
+          }
+
+          .opponent_move_status_ok {
+          }
+
+          .opponent_score {
+          }
+        }
+
+        .player_part {
         }
       }
     }

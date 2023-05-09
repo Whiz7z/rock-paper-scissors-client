@@ -63,6 +63,40 @@
     justify-self: center;
     align-self: center;
   }
+
+  @media (max-width: 770px) {
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+    row-gap: 10px;
+    border: 3px solid $text;
+    padding: 12px;
+    .room_id {
+      justify-self: center;
+
+      grid-column: 1/3;
+      grid-row: 1/2;
+    }
+
+    .room_join_btn {
+      grid-column: 1/2;
+      grid-row: 3/4;
+    }
+
+    .room_delete_btn {
+      grid-column: 2/3;
+      grid-row: 3/4;
+    }
+
+    .room_players_count {
+      justify-self: center;
+      grid-column: 1/3;
+      grid-row: 2/3;
+    }
+  }
+
+  @media (max-width: 420px) {
+    font-size: 1.4rem;
+  }
 }
 
 @keyframes blurBtn {

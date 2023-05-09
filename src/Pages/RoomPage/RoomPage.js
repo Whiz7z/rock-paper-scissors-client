@@ -99,9 +99,6 @@ const RoomPage = () => {
             ) : (
               <p className={styles.opponent_name}>Wait for your opponent</p>
             )}
-            {opponent && (
-              <p className={styles.opponent_score}>{opponentCount}</p>
-            )}
 
             {!opponent ? null : !opponentMadeMove && opponent ? (
               <p className={styles.opponent_move_status}>
@@ -114,6 +111,9 @@ const RoomPage = () => {
                   Opponent has made a move
                 </p>
               )
+            )}
+            {opponent && (
+              <p className={styles.opponent_score}>{opponentCount}</p>
             )}
           </div>
           <div className={styles.player_part}>

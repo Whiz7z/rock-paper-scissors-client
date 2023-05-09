@@ -94,4 +94,52 @@
       }
     }
   }
+
+  @media (max-width: 880px) {
+    width: 70%;
+
+    .create_room_form {
+      margin-top: 20px;
+
+      button {
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    width: 85%;
+  }
+  @media (max-width: 400px) {
+    width: 90%;
+
+    .player_info {
+      .nickname {
+        font-size: 2.2rem;
+      }
+
+      .winrate {
+        font-size: 1.4rem;
+      }
+
+      .winrate_percent {
+        font-size: 1.4rem;
+      }
+    }
+    .rooms_container {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .create_room_form {
+      input {
+        font-size: 1.45rem;
+      }
+
+      button {
+        font-size: 1.45rem;
+      }
+    }
+  }
 }
