@@ -7,6 +7,9 @@
   -webkit-box-shadow: 0px 0px 22px 12px rgba(0, 0, 0, 0.28);
   -moz-box-shadow: 0px 0px 22px 12px rgba(0, 0, 0, 0.28);
   box-shadow: 0px 0px 22px 12px rgba(0, 0, 0, 0.28);
+  border-radius: 25px;
+
+  border: 5px solid $text;
   display: grid;
   .player_info {
     justify-self: center;
@@ -67,6 +70,10 @@
         /* Microsoft Edge */
         color: $text;
       }
+    }
+
+    .create_error {
+      color: $bad;
     }
 
     button {

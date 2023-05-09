@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 import styles from "./RoomPage.module.scss";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   FaRegHandPaper,
   FaRegHandRock,
@@ -30,28 +30,34 @@ const RoomPage = () => {
   const navigates = useNavigate();
 
   const exitRoomHandler = () => {
-    socket.emit("room:exit", { roomId: roomId, token: user.token });
-    navigates("/");
+    if (user) {
+      socket.emit("room:exit", { roomId: roomId, token: user.token });
+    }
+    navigates("/main");
   };
 
   const makeMoveHandler = useCallback(
     (choice) => {
-      socket.emit("player:make-move", {
-        roomId: roomId,
-        choice: choice,
-        nickname: user.nickname,
-      });
+      if (user) {
+        socket.emit("player:make-move", {
+          roomId: roomId,
+          choice: choice,
+          nickname: user.nickname,
+        });
+      }
     },
-    [roomId, user.nickname]
+    [roomId, user]
   );
 
   useEffect(() => {
-    socket.emit("room:join", { roomId: roomId, token: user.token });
+    if (user) {
+      socket.emit("room:join", { roomId: roomId, token: user.token });
+    }
 
     return () => {
       socket.removeListener("room:join");
     };
-  }, [roomId, user.token]);
+  }, [roomId, user]);
 
   useEffect(() => {
     const getPlayersInTheRoom = async () => {
@@ -80,7 +86,11 @@ const RoomPage = () => {
           Exit room
         </button>
         <div className={styles.game_block}>
-          <h2 className={styles.room_name}>Room - {roomId}</h2>
+          <h2 className={styles.room_name}>
+            Room
+            <br />
+            {roomId}
+          </h2>
           <div className={styles.opponent_part}>
             {opponent ? (
               <p className={styles.opponent_name}>

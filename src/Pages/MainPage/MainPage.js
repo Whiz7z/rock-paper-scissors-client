@@ -5,10 +5,16 @@ import { useUser } from "../../zustand/store";
 import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
-  const { user, logout } = useUser((state) => state);
+  const { user, logout, getWinrate } = useUser((state) => state);
   const navigate = useNavigate();
   // if (!sessionStorage.getItem("userData")) {
   // }
+
+  useEffect(() => {
+    if (user) {
+      getWinrate(user.token);
+    }
+  }, [user, getWinrate]);
 
   return (
     <div className={styles.container}>
@@ -17,10 +23,10 @@ const MainPage = () => {
           className={styles.log_out_btn}
           onClick={() => {
             logout();
-            navigate("/auth");
+            navigate("/");
           }}
         >
-          Log Out
+          {!user ? "Log in" : "Log Out"}
         </button>
         <AllRoomsPanel />
       </div>

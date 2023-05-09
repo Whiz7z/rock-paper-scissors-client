@@ -144,9 +144,10 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<MainPage />} exact />
-        <Route path="/auth" element={<AuthPage />} exact />
-        <Route path="/room/:roomId" element={<RoomPage />} exact />
+        <Route path="/" element={<AuthPage />} exact />
+        <Route path="/main" element={<MainPage />} exact />
+
+        <Route path="/main/room/:roomId" element={<RoomPage />} exact />
       </Routes>
     </div>
   );

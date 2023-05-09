@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./AuthPage.module.scss";
 import { Formik, Form, Field } from "formik";
-import { useUser } from "../../zustand/store";
+import { useUser, useRooms } from "../../zustand/store";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
@@ -19,16 +19,11 @@ const AuthPage = () => {
   const navigate = useNavigate();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const { user, login, register } = useUser((state) => state);
+  const { setError } = useRooms((state) => state);
 
   const toggleAuthMode = () => {
     setIsLoginMode((prev) => !prev);
   };
-  // if (
-  //   sessionStorage.getItem("userData") &&
-  //   JSON.parse(sessionStorage.getItem("userData")).token
-  // ) {
-  //   navigate("/");
-  // }
 
   return (
     <div className={styles.container}>
@@ -44,12 +39,14 @@ const AuthPage = () => {
             console.log(values);
 
             if (isLoginMode) {
-              await login(values.nickname, values.password).then(() =>
-                navigate("/")
+              await login(values.nickname, values.password).then(
+                () => setError(null),
+                navigate("/main")
               );
             } else {
-              await register(values.nickname, values.password).then(() =>
-                navigate("/")
+              await register(values.nickname, values.password).then(
+                () => setError(null),
+                navigate("/main")
               );
             }
           }}

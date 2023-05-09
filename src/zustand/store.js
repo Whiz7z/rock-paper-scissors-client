@@ -10,6 +10,8 @@ export const useRooms = create(
   devtools(
     (set) => ({
       rooms: [],
+      winrate: null,
+      createRoomError: null,
       addRoom: (room) =>
         set((state) => {
           if (!state.rooms.find((rm) => room.roomId === rm.roomId)) {
@@ -28,6 +30,9 @@ export const useRooms = create(
           config
         );
         set({ rooms: await response.data });
+      },
+      setError: (error) => {
+        set({ createRoomError: error });
       },
     }),
     "useRooms"
@@ -87,6 +92,18 @@ export const useUser = create(
       logout: () => {
         sessionStorage.removeItem("userData");
         set({ user: null });
+      },
+
+      getWinrate: async (token) => {
+        const response = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/users/winrate`,
+          {
+            params: { token: token },
+          },
+          config
+        );
+
+        set({ winrate: response.data });
       },
     }),
     "useUser"

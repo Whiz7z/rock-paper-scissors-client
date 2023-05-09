@@ -3,10 +3,11 @@
 .wrapper {
   width: 100%;
   height: 100vh;
-  background-color: transparent;
+  background-color: rgba(128, 128, 128, 0.6);
 
   display: grid;
   position: fixed;
+  z-index: 100;
   .container {
     width: 380px;
     height: 300px;
@@ -86,9 +87,6 @@
 
 .scissors {
   transform: rotateZ(80deg);
-  &:hover {
-    transform: scale(140%) rotateZ(80deg);
-  }
 }
 
 @keyframes onShow {

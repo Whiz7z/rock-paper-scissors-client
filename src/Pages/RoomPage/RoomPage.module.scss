@@ -26,6 +26,15 @@
     .game_block {
       width: 550px;
       justify-self: center;
+      height: 80vh;
+      -webkit-box-shadow: 0px 0px 22px 12px rgba(0, 0, 0, 0.28);
+      -moz-box-shadow: 0px 0px 22px 12px rgba(0, 0, 0, 0.28);
+      box-shadow: 0px 0px 22px 12px rgba(0, 0, 0, 0.28);
+      border-radius: 25px;
+      padding: 20px 50px 40px 50px;
+      align-self: center;
+
+      border: 5px solid $text;
       .room_name {
         text-align: center;
         margin-bottom: 50px;
@@ -40,8 +49,12 @@
 
         .opponent_name {
           text-align: center;
+          justify-self: center;
           font-size: 1.8rem;
           font-weight: bold;
+          background-color: $text;
+          padding: 5px 5px;
+          color: $back;
           span {
             font-weight: bold;
             color: $bad;
@@ -121,12 +134,12 @@
         .moves {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          row-gap: 120px;
+          row-gap: 50px;
           .move {
             svg {
-              width: 160px;
+              width: 140px;
               height: 160px;
-              size: 50px;
+              size: 40px;
               cursor: pointer;
               transition: 300ms;
               fill-opacity: 90%;
@@ -138,15 +151,17 @@
           }
 
           .paper_move {
-            justify-self: start;
+            justify-self: center;
             svg {
+              width: 140px;
+              height: 140px;
               &:hover {
                 transform: scale(140%);
               }
             }
           }
           .rock_move {
-            justify-self: end;
+            justify-self: center;
             svg {
               &:hover {
                 transform: scale(140%);

@@ -9,18 +9,12 @@ const RoomListItem = ({ room }) => {
   const { user } = useUser((state) => state);
   const navigate = useNavigate();
   const deleteRoomHandler = () => {
-    // deleteRoom(room.roomId);
-
-    socket.emit("room:delete", room.roomId);
+    if (user) {
+      socket.emit("room:delete", { roomId: room.roomId, token: user.token });
+    }
   };
 
   const joinRoomHandler = useCallback(() => {
-    // socket.emit("room:join", {
-    //   roomId: room.roomId,
-    //   token: user.token,
-    // });
-
-    //socket.emit("room:join", { roomId: room.roomId, token: user.token });
     navigate(`room/${room.roomId}`);
   }, []);
 
