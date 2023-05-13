@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import MainPage from "./Pages/MainPage/MainPage";
 import "./App.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { socket } from "./socket/socket";
 import RoomPage from "./Pages/RoomPage/RoomPage";
 import AuthPage from "./Pages/AuthPage/AuthPage";
@@ -70,6 +70,20 @@ function App() {
       resetMoves();
     }
 
+    const playerMoveHandler = (payload) => {
+      console.log("player move ", payload);
+
+      console.log(user);
+
+      if (payload[0].nickname === user.nickname && user) {
+        setWhoMoves(true);
+        console.log("me");
+      } else if (payload[0].nickname !== user.nickname) {
+        setWhoMoves(false);
+        console.log("him");
+      }
+    };
+
     function playerWinnerHandler(payload) {
       console.log("winner payload", payload);
 
@@ -104,18 +118,12 @@ function App() {
       resetMoves();
     }
 
-    function playerMoveHandler(payload) {
-      console.log("player move ", payload);
-
-      if (payload[0].nickname === user.nickname) {
-        setWhoMoves(true);
-        console.log("me");
-      } else if (payload[0].nickname !== user.nickname) {
-        setWhoMoves(false);
-        console.log("him");
-      }
+    if (user) {
+      socket.on("player:ready", playerReadyHandler);
+      socket.on("player:exited", playerExitedHandler);
+      socket.on("player:move-made", playerMoveHandler);
+      socket.on("player:winner", playerWinnerHandler);
     }
-
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
     socket.on("room:created", getAllRoomHandler);
@@ -123,11 +131,6 @@ function App() {
     socket.on("room:joined", getAllRoomHandler);
     socket.on("room:exited", getAllRoomHandler);
     socket.on("room:notjoined", notJoinedHandler);
-
-    socket.on("player:ready", playerReadyHandler);
-    socket.on("player:exited", playerExitedHandler);
-    socket.on("player:move-made", playerMoveHandler);
-    socket.on("player:winner", playerWinnerHandler);
 
     return () => {
       socket.off("connect", onConnect);

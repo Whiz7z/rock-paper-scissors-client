@@ -36,18 +36,15 @@ const RoomPage = () => {
     navigates("/main");
   };
 
-  const makeMoveHandler = useCallback(
-    (choice) => {
-      if (user) {
-        socket.emit("player:make-move", {
-          roomId: roomId,
-          choice: choice,
-          nickname: user.nickname,
-        });
-      }
-    },
-    [roomId, user]
-  );
+  const makeMoveHandler = (choice) => {
+    if (user) {
+      socket.emit("player:make-move", {
+        roomId: roomId,
+        choice: choice,
+        nickname: user.nickname,
+      });
+    }
+  };
 
   useEffect(() => {
     if (user) {
