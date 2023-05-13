@@ -10,8 +10,9 @@ import axios from "axios";
 
 import { socket } from "../../socket/socket";
 import { useUser, useGame } from "../../zustand/store";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "../../Components/Modal/Modal";
+
 const RoomPage = () => {
   const { roomId } = useParams();
   const { user } = useUser((state) => state);
@@ -72,6 +73,11 @@ const RoomPage = () => {
     getPlayersInTheRoom();
   }, [roomId, setPlayersInTheRoom]);
 
+  useEffect(() => {
+    window.onpopstate = () => {
+      exitRoomHandler();
+    };
+  }, []);
   return (
     <div className={styles.container}>
       {lastMatch && <Modal />}
