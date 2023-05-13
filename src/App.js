@@ -50,7 +50,7 @@ function App() {
       resetCount();
       setPlayersInTheRoom(payload.playersInTheRoom);
       if (payload.playersInTheRoom.length) {
-        console.log("set opponent");
+        console.log("ready handler", user);
         setOpponent(
           payload.playersInTheRoom.find((nick) => nick !== user.nickname)
         );
@@ -140,7 +140,7 @@ function App() {
       socket.off("player:exited", playerExitedHandler);
       socket.off("player:winner", playerWinnerHandler);
     };
-  }, []);
+  }, [user]);
   return (
     <div className="App">
       <Routes>
